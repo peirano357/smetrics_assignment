@@ -14,15 +14,6 @@
 class StatsController {
 
     //put your code here
-
-    public function mainAction() { 
-        // Load DateTimeHelper class
-        $this->loader->helper("DateTimeHelper");
-        $datetime_helper = new DateTimeHelper();
-        $datetime_helper->weekOfMonth(date());
-
-    }
-
     public function indexAction() {
 
         $postModel = new PostModel("posts");
@@ -31,19 +22,18 @@ class StatsController {
         for ($i = 1; $i <= 5; $i++) {
             $posts = $postModel->fetchPosts($GLOBALS['config']['apipath'] . 'posts', $i);
             $totalposts = array_merge($totalposts, $posts->posts);
-            // $posts_grouped = $postModel->groupPosts($posts->posts, 'created_time');
         }
 
         // now we have all posts in the same array in memory
-        $processed_posts = $this->processPosts($totalposts);
-
+        $processed_posts = json_encode($this->processPosts($totalposts));
+        
         // Load View template
         include CURR_VIEW_PATH . "statistics.php";
     }
 
     /**
-     * This function process the posts aplying the statistics
-     * 
+     * Processes the posts and generates stats
+     * @param obj array $posts
      */
     protected function processPosts($posts) {
         
@@ -66,15 +56,7 @@ class StatsController {
         
         }
         
-        echo json_encode($processed_result);
-        
-        
-        
-        
-
-        echo '<pre>';
-        print_r($processed_result);
-        echo '</pre>';
+        return $processed_result;
         
     }
 
