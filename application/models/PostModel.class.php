@@ -20,8 +20,8 @@ class PostModel extends Model {
      * @return obj array
      */
     public function fetchPosts($url, $page) {
-        $token = $this->generateAccessToken();       
-        $availablePosts = json_decode(\CurlRequest\Request::basicGet($url.'?sl_token='.$token.'&page='.$page));
+        $token = $this->generateAccessToken();
+        $availablePosts = json_decode(\CurlRequest\Request::basicGet($url . '?sl_token=' . $token . '&page=' . $page));
         return $availablePosts->data;
     }
 
@@ -56,11 +56,11 @@ class PostModel extends Model {
             if ($key === null) {
                 continue;
             }
-            
-            if ($_key == 'created_time'){
-               $key = substr($key, 0, 7);
+
+            if ($_key == 'created_time') {
+                $key = substr($key, 0, 7);
             }
- 
+
             $grouped[$key][] = $value;
         }
 
@@ -71,15 +71,56 @@ class PostModel extends Model {
 
             foreach ($grouped as $key => $value) {
                 $params = array_merge([$value], array_slice($args, 2, func_num_args()));
- 
-                $grouped[$key] = call_user_func_array(array($this,'groupPosts'), $params);
+
+                $grouped[$key] = call_user_func_array(array($this, 'groupPosts'), $params);
             }
         }
         return $grouped;
     }
-    
-    protected function addExtraKeys(array $array){
+
+    /**
+     * Retrieves the longest post from a given array of posts
+     * grouped by some key
+     * @param obj array $posts
+     * @return array
+     */
+    public function getLongestPost(array $posts) {
+
+        // @TO-DO valdiate if there is more than 1 longest post
+        // right now if there are 2 posts with the max char length, 
+        // it will return the first one found.
+
+        $longest_post = $posts[0];
+        $longest_count = strlen($posts[0]->message);
+
+        foreach ($posts as $post) {
+            $post_length = strlen($post->message);
+            if ($post_length > $longest_count) {
+                $longest_post = $post;
+                $longest_count = strlen($post->message);
+            }
+        }
+
+        $longest_post->chars_count = $longest_count;
+        return $longest_post;
+    }
+
+    /**
+     * Retrieves the average characters length of posts
+     * from a given array of posts
+     * grouped by some key
+     * @param obj array $posts
+     * @return int
+     */
+    public function getAverageCharsLength(array $posts) {
+
+        $total_chars_count = 0;
+        foreach ($posts as $post) {
+            $post_length = strlen($post->message);
+            $total_chars_count = $total_chars_count + $post_length;
+        }
         
+        return floor($total_chars_count/count($posts));
     }
 
 }

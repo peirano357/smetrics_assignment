@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -15,44 +14,23 @@ class Framework {
 
     //put your code here
     public static function run() {
-
-        echo "run()";
-
         self::init();
-
         self::autoload();
-
         self::dispatch();
     }
 
     private static function init() {
 
         // Define path constants
-
         define("DS", DIRECTORY_SEPARATOR);
-
         define("ROOT", getcwd() . DS);
-
         define("APP_PATH", ROOT . 'application' . DS);
-
         define("FRAMEWORK_PATH", ROOT . "framework" . DS);
-
-        define("PUBLIC_PATH", ROOT . "public" . DS);
-
-
         define("CONFIG_PATH", APP_PATH . "config" . DS);
-
         define("CONTROLLER_PATH", APP_PATH . "controllers" . DS);
-
         define("MODEL_PATH", APP_PATH . "models" . DS);
-
         define("VIEW_PATH", APP_PATH . "views" . DS);
-
-
         define("CORE_PATH", FRAMEWORK_PATH . "core" . DS);
-
-        define('DB_PATH', FRAMEWORK_PATH . "database" . DS);
-
         define("LIB_PATH", FRAMEWORK_PATH . "lib" . DS);
 
         // Define platform, controller, action, for example:
@@ -71,11 +49,8 @@ class Framework {
 
 
         // Load core classes
-
         require CORE_PATH . "Controller.class.php";
-
         require CORE_PATH . "Loader.class.php";
-        // require DB_PATH . "Mysql.class.php";
         require CORE_PATH . "Model.class.php";
 
 
@@ -96,18 +71,14 @@ class Framework {
      */
     private static function load($classname) {
 
-
         // Here simply autoload app’s controller and model classes
-
         if (substr($classname, -10) == "Controller") {
 
             // Controller
-
             require_once CURR_CONTROLLER_PATH . "$classname.class.php";
         } elseif (substr($classname, -5) == "Model") {
-
+            
             // Model
-
             require_once MODEL_PATH . "$classname.class.php";
         }
     }
@@ -119,5 +90,4 @@ class Framework {
         $controller = new $controller_name;
         $controller->$action_name();
     }
-
 }
