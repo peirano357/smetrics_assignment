@@ -14,10 +14,6 @@
 
 class Loader{
 
-    //put your code here
-    // the idea is to do something similar I did when I included
-    // the config files.
-
     public function library($lib){
         include_once LIB_PATH . "$lib.php";
     }
@@ -25,5 +21,4 @@ class Loader{
     public function helper($helper){
         include_once HELPER_PATH . "{$helper}.php";
     }
-
 }
