@@ -19,11 +19,11 @@ class Loader{
     // the config files.
 
     public function library($lib){
-        include LIB_PATH . "$lib.class.php";
+        include_once LIB_PATH . "$lib.php";
     }
     
     public function helper($helper){
-        include HELPER_PATH . "{$helper}_helper.php";
+        include_once HELPER_PATH . "{$helper}.php";
     }
 
 }

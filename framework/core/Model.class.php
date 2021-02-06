@@ -11,18 +11,18 @@
  *
  * @author josep
  */
-include_once $_SERVER['DOCUMENT_ROOT'] . '\framework\lib\Request.class.php';
-include_once $_SERVER['DOCUMENT_ROOT'] . '\framework\helper\DateTime.class.php';
 
 class Model {
 
     //put your code here
-    protected $db; //database connection object
     protected $path; //url/entity name
-    protected $fields = array();  //fields list
 
     public function __construct($path) {
-        $this->api = new stdClass();
+        
+        // load helpers
+        $this->loader = new Loader();
+        $this->loader->library("Request");
+        
         $this->basepath = $GLOBALS['config']['apipath'];
         $this->endpoint = $GLOBALS['config']['apipath'] . $path;
         $this->email = $GLOBALS['config']['email'];
@@ -40,9 +40,4 @@ class Model {
         $token = $tokenRequest->data->sl_token;
         return $token;
     }
-
-    public function pageRows($offset, $limit, $where = '') {
-
-    }
-
 }

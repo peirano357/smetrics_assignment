@@ -7,14 +7,14 @@
  */
 
 /**
- * Description of DateTimeHelper
+ * Description of DateTime
  *
  * @author josep
  */
 
 namespace Helpers;
 
-class DateTimeHelper {
+class DateTime {
 
      /**
      * Returns the amount of weeks into the month a date is

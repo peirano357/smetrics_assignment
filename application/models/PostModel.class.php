@@ -130,10 +130,12 @@ class PostModel extends Model {
      */
     public function getTotalPostsByWeekNumber(array $posts, $yearly = FALSE) {
 
+        $this->loader->helper("DateTime");
+
         $weeks_in_month = array('Week 1' => 0, 'Week 2' => 0, 'Week 3' => 0, 'Week 4' => 0, 'Week 5' => 0, 'Week 6' => 0);
         foreach ($posts as $post) {
             // find week number in month
-            $week_number = \Helpers\DateTimeHelper::weekOfMonth($post->created_time);
+            $week_number = \Helpers\DateTime::weekOfMonth($post->created_time);
             $weeks_in_month['Week ' . $week_number] ++;
         }
 
