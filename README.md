@@ -22,7 +22,7 @@ stats is sufficient.
 
 Set up the PHP project with WAMP/XAMPP, etc. and simply navigate to
 ```
-/index.php?p=home&c=stats&a=index
+/index.php?p=home&c=stats&a=index&totalpages=10
 ```
 
 to see the statistics of the processed posts. You should see something as follows:

@@ -15,13 +15,22 @@ class StatsController {
 
     //put your code here
     public function indexAction() {
-
+        
         $postModel = new PostModel("posts");
+        $totalpages = filter_input(INPUT_GET, 'totalpages', FILTER_SANITIZE_STRING);
+        if(!is_numeric($totalpages)){
+            $totalpages = 10;
+        }
+        
         $totalposts = [];
 
-        for ($i = 1; $i <= 5; $i++) {
+        for ($i = 1; $i <= $totalpages; $i++) {
             $posts = $postModel->fetchPosts($GLOBALS['config']['apipath'] . 'posts', $i);
-            $totalposts = array_merge($totalposts, $posts->posts);
+            
+            // do not append empty or wrong data
+            if (isset($posts->posts) && count($posts->posts)>0){
+                $totalposts = array_merge($totalposts, $posts->posts);
+            }
         }
 
         // now we have all posts in the same array in memory
