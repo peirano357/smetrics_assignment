@@ -140,4 +140,20 @@ class PostModel extends Model {
         return $weeks_in_month;
     }
 
+     /**
+     * Retrieves an average number of posts by a given user
+     * grouped by some key
+     * @param obj array $posts
+     * @return array
+     */
+    
+    public function averagePostsByUser(array $posts) {
+
+        $posts_by_user = $this->groupPosts($posts, 'from_id');
+        $average_posts_in_month = [];
+        foreach ($posts_by_user as $user_post_key => $user_post_value) {
+            $average_posts_in_month[$user_post_key] = round(count( $user_post_value)*100/count($posts),2);
+        }
+        return $average_posts_in_month;
+    }
 }

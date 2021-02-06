@@ -64,6 +64,8 @@ class StatsController {
             // get total posts split by week number in the year
             $processed_result['total_posts_per_week_number'][$posts_month_key] = $postModel->getTotalPostsByWeekNumber($posts_month_value);
             
+            // get average posts number by user
+            $processed_result['average_number_of_post_per_user'][$posts_month_key] = $postModel->averagePostsByUser($posts_month_value);
         
         
         }
