@@ -19,7 +19,7 @@ class Model {
 
     public function __construct($path) {
         
-        // load helpers
+        // load libraries / helpers
         $this->loader = new Loader();
         $this->loader->library("Request");
         
@@ -30,6 +30,11 @@ class Model {
         $this->clientid = $GLOBALS['config']['clientid'] ;
     }
 
+    /**
+     * @TO-DO: implement token check, use this function instead of creating
+     * a new token on every call
+     * 
+     */
     protected function isTokenValid() {
         
     }

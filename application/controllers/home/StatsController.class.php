@@ -37,11 +37,8 @@ class StatsController {
         // now we have all posts in the same array in memory
         $processed_posts = $this->processPosts($totalposts);
 
-
-
-
         // Load View template
-        include CURR_VIEW_PATH . "list.html";
+        include CURR_VIEW_PATH . "statistics.php";
     }
 
     /**
@@ -67,8 +64,11 @@ class StatsController {
             // get average posts number by user
             $processed_result['average_number_of_post_per_user'][$posts_month_key] = $postModel->averagePostsByUser($posts_month_value);
         
-        
         }
+        
+        echo json_encode($processed_result);
+        
+        
         
         
 
