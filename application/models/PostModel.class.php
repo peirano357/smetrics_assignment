@@ -119,8 +119,25 @@ class PostModel extends Model {
             $post_length = strlen($post->message);
             $total_chars_count = $total_chars_count + $post_length;
         }
-        
-        return floor($total_chars_count/count($posts));
+
+        return floor($total_chars_count / count($posts));
+    }
+
+    /**
+     * Retrieves total posts amount split by week number in a month
+     * @param obj array $posts
+     * @return array
+     */
+    public function getTotalPostsByWeekNumber(array $posts, $yearly = FALSE) {
+
+        $weeks_in_month = array('Week 1' => 0, 'Week 2' => 0, 'Week 3' => 0, 'Week 4' => 0, 'Week 5' => 0, 'Week 6' => 0);
+        foreach ($posts as $post) {
+            // find week number in month
+            $week_number = \Helpers\DateTimeHelper::weekOfMonth($post->created_time);
+            $weeks_in_month['Week ' . $week_number] ++;
+        }
+
+        return $weeks_in_month;
     }
 
 }

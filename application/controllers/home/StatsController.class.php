@@ -15,8 +15,12 @@ class StatsController {
 
     //put your code here
 
-    public function mainAction() {
-        //include CURR_VIEW_PATH . "main.html";
+    public function mainAction() { 
+        // Load DateTimeHelper class
+        $this->loader->helper("DateTimeHelper");
+        $datetime_helper = new DateTimeHelper();
+        $datetime_helper->weekOfMonth(date());
+
     }
 
     public function indexAction() {
@@ -55,14 +59,21 @@ class StatsController {
             $processed_result['longest_post_in_month'][$posts_month_key] = $postModel->getLongestPost($posts_month_value);
             
             // get average chars lenght of posts by month
-            $processed_result['average_chars_lenght_in_month'][$posts_month_key] = $postModel->getAverageCharsLength($posts_month_value);
+            $processed_result['average_chars_length_in_month'][$posts_month_key] = $postModel->getAverageCharsLength($posts_month_value);
+            
+            // get total posts split by week number in the year
+            $processed_result['total_posts_per_week_number'][$posts_month_key] = $postModel->getTotalPostsByWeekNumber($posts_month_value);
+            
+        
+        
         }
         
-        /*
+        
+
         echo '<pre>';
         print_r($processed_result);
         echo '</pre>';
-        */
+        
     }
 
 }

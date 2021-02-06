@@ -12,6 +12,7 @@
  * @author josep
  */
 include_once $_SERVER['DOCUMENT_ROOT'] . '\framework\lib\Request.class.php';
+include_once $_SERVER['DOCUMENT_ROOT'] . '\framework\helper\DateTime.class.php';
 
 class Model {
 

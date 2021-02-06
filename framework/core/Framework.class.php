@@ -32,6 +32,8 @@ class Framework {
         define("VIEW_PATH", APP_PATH . "views" . DS);
         define("CORE_PATH", FRAMEWORK_PATH . "core" . DS);
         define("LIB_PATH", FRAMEWORK_PATH . "lib" . DS);
+        define("HELPER_PATH", FRAMEWORK_PATH . "helper" . DS);
+        
 
         // Define platform, controller, action, for example:
         // index.php?p=admin&c=Goods&a=add
