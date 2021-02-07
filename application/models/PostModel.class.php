@@ -49,7 +49,7 @@ class PostModel extends Model {
                 $key = call_user_func($func, $value);
             } elseif (is_object($value) && property_exists($value, $_key)) {
                 $key = $value->{$_key};
-            } elseif (isset($value[$_key])) {
+            } elseif ( isset($value[$_key])) {
                 $key = $value[$_key];
             }
 

@@ -39,6 +39,13 @@ class Model {
         
     }
 
+    
+    /**
+     * Generates an access token for a given user on
+     * Supermetrics service.
+     * @return string
+     */
+
     protected function generateAccessToken() {
         $params = array('client_id' => $this->clientid , 'email' =>  $this->email, 'name' => $this->name);
         $tokenRequest = json_decode(\CurlRequest\Request::basicPost($this->basepath.'register', $params));

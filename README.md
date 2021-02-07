@@ -9,12 +9,18 @@ Register a short-lived token on the fictional Supermetrics Social Network REST A
 2. Fetch the posts of fictional users on a fictional social platform and process their posts.
 3. You will have 1000 posts over a six month period.
 4. Show stats on the following:
+
 a. - Average character length of posts per month
+
 b. - Longest post by character length per month
+
 c. - Total posts split by week number
+
 d. - Average number of posts per user per month
+
 5. Design your thinking and code to be generic, extendable, easy to maintain by other staff
 members while thinking about performance.
+
 You do not need to create any HTML pages for the display of the data. JSON output of the
 stats is sufficient.
 
@@ -204,4 +210,10 @@ to see the statistics of the processed posts. You should see something as follow
 
 
 ## Further optimizations and TO-DOs
+- Add more validation for missing fields, etc. I've only added the basic try-catch checks on the very lower level functions in the model.
 
+- Right now I'm generating a token on every page-refresh call. I've created a function isTokenValid() but I have not implemented it.
+
+- Unit testing.
+
+- Implement better View classes.

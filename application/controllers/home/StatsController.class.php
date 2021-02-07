@@ -49,7 +49,7 @@ class StatsController {
         $processed_result = [];
         $postModel = new PostModel("posts");
         $posts_grouped_month = $postModel->groupPosts($posts, 'created_time');
-        
+       
         foreach($posts_grouped_month as $posts_month_key=>$posts_month_value){
             // get longest post by char lenght by month
             $processed_result['longest_post_in_month'][$posts_month_key] = $postModel->getLongestPost($posts_month_value);
